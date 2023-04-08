@@ -25,9 +25,8 @@
                         const file = event.target.files[0];
                         const reader = new FileReader();
 
-                        reader.onload = () => {
-                            const loader = new THREE.FBXLoader();
-                            loader.parse(reader.result, '', (object) => {
+                        reader.onload = () => {                            
+                            THREE.FBXLoader.parse(reader.result, '', (object) => {
                                 // Process the bone hierarchy
                                 const skeleton = object.children.find(child => child instanceof THREE.Skeleton);
                                 if (skeleton) {
