@@ -27,8 +27,9 @@
 
                         reader.onload = (event) => {
                             const boneHierarchy = JSON.parse(reader.result);
+                            console.log('Parsed JSON data:', boneHierarchy);
                             const rootBone = createBlockbenchBone(boneHierarchy);
-                            rootBone.addTo(); // Add root bone to the scene without any parameter
+                            rootBone.addTo(Group.selected);
                         };
 
                         reader.readAsText(file);
@@ -44,24 +45,38 @@
     });
 })();
 
+function createBlockbenchBone(boneNode, parentPivot = [0, 0, 0], parentBone = null) {
+    // Convert position, rotation, and scale objects to arrays
+    const positionArray = [boneNode.position.x, boneNode.position.y, boneNode.position.z];
+    const rotationArray = [boneNode.rotation.x, boneNode.rotation.y, boneNode.rotation.z];
+    // const scaleArray = [boneNode.scale.x, boneNode.scale.y, boneNode.scale.z];
 
-function createBlockbenchBone(boneNode) {
+    // Calculate the bone's position relative to its parent
+    const positionRelativeToParent = [
+        parentPivot[0] + positionArray[0],
+        parentPivot[1] + positionArray[1],
+        parentPivot[2] + positionArray[2],
+    ];
+
     // Create a Blockbench bone from a bone node
     const bbBone = new Group({
         name: boneNode.name,
-        origin: boneNode.position,
-        rotation: boneNode.rotation,
-        extend: boneNode.scale,
-        pivot: boneNode.position 
+        origin: positionRelativeToParent,
+        rotation: rotationArray,
+        // extend: scaleArray
     });
+
+    if(parentBone) {
+        bbBone.parent = parentBone;
+    }
 
     // Process and add children
     if (boneNode.children) {
-        boneNode.children.forEach(child => {
-            const bbChild = createBlockbenchBone(child);
+        boneNode.children.forEach((child) => {
+            const bbChild = createBlockbenchBone(child, positionRelativeToParent, boneNode);
             bbChild.addTo(bbBone);
         });
     }
 
     return bbBone;
-};
+}
