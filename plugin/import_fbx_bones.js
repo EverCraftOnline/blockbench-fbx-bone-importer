@@ -14,45 +14,43 @@
                 name: 'Import Bone Hierarchy from FBX',
                 description: 'Import bone hierarchy from an FBX file',
                 icon: 'bar_chart', // Replace 'icon' with an icon file or a Material Icons name
-                click: () => this.importFbx()               
+                click: () => {
+                    // Create file input element
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = '.fbx';
+
+                    fileInput.onchange = (event) => {
+                        // Load FBX file
+                        const file = event.target.files[0];
+                        const reader = new FileReader();
+
+                        reader.onload = () => {
+                            const loader = new THREE.FBXLoader();
+                            loader.parse(reader.result, '', (object) => {
+                                // Process the bone hierarchy
+                                const skeleton = object.children.find(child => child instanceof THREE.Skeleton);
+                                if (skeleton) {
+                                    this.processBones(skeleton.bones);
+                                } else {
+                                    Blockbench.showMessageBox({
+                                        title: 'Error',
+                                        message: 'No bone hierarchy found in the selected FBX file.',
+                                        icon: 'error'
+                                    });
+                                }
+                            });
+                        };
+
+                        reader.readAsArrayBuffer(file);
+                    };
+                    fileInput.click();
+                }              
             });
             MenuBar.addAction(importAction, 'tools.0');
         },
         onunload() {
             importAction.delete();
-        },
-        importFbx() {
-            // Create file input element
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = '.fbx';
-
-            fileInput.onchange = (event) => {
-                // Load FBX file
-                const file = event.target.files[0];
-                const reader = new FileReader();
-
-                reader.onload = () => {
-                    const loader = new THREE.FBXLoader();
-                    loader.parse(reader.result, '', (object) => {
-                        // Process the bone hierarchy
-                        const skeleton = object.children.find(child => child instanceof THREE.Skeleton);
-                        if (skeleton) {
-                            this.processBones(skeleton.bones);
-                        } else {
-                            Blockbench.showMessageBox({
-                                title: 'Error',
-                                message: 'No bone hierarchy found in the selected FBX file.',
-                                icon: 'error'
-                            });
-                        }
-                    });
-                };
-
-                reader.readAsArrayBuffer(file);
-            };
-
-            fileInput.click();
         },
         processBones(bones) {
             // Traverse the bone hierarchy and create Blockbench bones
