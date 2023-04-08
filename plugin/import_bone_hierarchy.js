@@ -28,7 +28,7 @@
                         reader.onload = (event) => {
                             const boneHierarchy = JSON.parse(reader.result);
                             const rootBone = createBlockbenchBone(boneHierarchy);
-                            rootBone.addTo(Group.selected);
+                            rootBone.addTo(); // Add root bone to the scene without any parameter
                         };
 
                         reader.readAsText(file);
