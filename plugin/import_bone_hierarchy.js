@@ -49,7 +49,7 @@ function createBlockbenchBone(boneNode) {
     // Create a Blockbench bone from a bone node
     const bbBone = new Group({
         name: boneNode.name,
-        from: boneNode.position,
+        position: boneNode.position,
         rotation: boneNode.rotation,
         scale: boneNode.scale
     });
