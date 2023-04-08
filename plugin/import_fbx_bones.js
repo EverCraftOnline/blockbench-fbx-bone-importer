@@ -1,7 +1,7 @@
 (() => {    
     var importAction;
 
-    Plugin.register('fbx_bone_hierarchy_importer', {
+    Plugin.register('import_fbx_bones', {
         name: 'FBX Bone Importer',
         icon: 'icon', // Replace 'icon' with an icon file or a Material Icons name
         author: 'h1ddentree productions',
