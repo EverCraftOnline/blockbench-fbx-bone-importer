@@ -1,11 +1,7 @@
-import * as THREE from 'https://threejs.org/build/three.module.js';
-import { FBXLoader } from './FBXLoader.js';
-
-(() => {
+(() => {    
     var importAction;
 
-    Plugin.register({
-        id: 'fbx_bone_hierarchy_importer',
+    Plugin.register('fbx_bone_hierarchy_importer', {
         name: 'FBX Bone Importer',
         icon: 'icon', // Replace 'icon' with an icon file or a Material Icons name
         author: 'h1ddentree productions',
@@ -22,7 +18,7 @@ import { FBXLoader } from './FBXLoader.js';
                     this.importFbx();
                 },
             });
-            MenuBar.addAction(importAction, 'tools.import.0');
+            MenuBar.addAction(importAction, 'tools.0');
         },
         onunload() {
             importAction.delete();
