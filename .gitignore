@@ -1,0 +1,16 @@
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE and editor files
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore Node.js dependency folders (if you decide to use npm)
+node_modules/
+
+# Ignore build and distribution folders (if you create them later)
+dist/
+build/
