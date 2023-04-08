@@ -1,4 +1,9 @@
+import * as THREE from 'https://threejs.org/build/three.module.js';
+import { FBXLoader } from './FBXLoader.js';
+
 (() => {
+    var importAction;
+
     Plugin.register({
         id: 'fbx_bone_hierarchy_importer',
         name: 'FBX Bone Importer',
@@ -9,22 +14,18 @@
         min_version: '3.0.0',
         variant: 'both',
         onload() {
-            this.registerPlugin();
-        },
-        onunload() {
-            // Clean up when the plugin is unloaded (if necessary)
-        },
-        registerPlugin() {
-            const importAction = new Action('import_fbx_bone_hierarchy', {
+            importAction = new Action('import_fbx_bone_hierarchy', {
                 name: 'Import Bone Hierarchy from FBX',
                 description: 'Import bone hierarchy from an FBX file',
-                icon: 'icon', // Replace 'icon' with an icon file or a Material Icons name
+                icon: 'bar_chart', // Replace 'icon' with an icon file or a Material Icons name
                 click: () => {
                     this.importFbx();
                 },
             });
-
-            importAction.addMenuNode(MenuBar.plugins);
+            MenuBar.addAction(importAction, 'tools.import.0');
+        },
+        onunload() {
+            importAction.delete();
         },
         importFbx() {
             // Create file input element
@@ -38,7 +39,7 @@
                 const reader = new FileReader();
 
                 reader.onload = () => {
-                    const loader = new THREE.FBXLoader();
+                    const loader = new FBXLoader();
                     loader.parse(reader.result, '', (object) => {
                         // Process the bone hierarchy
                         const skeleton = object.children.find(child => child instanceof THREE.Skeleton);
