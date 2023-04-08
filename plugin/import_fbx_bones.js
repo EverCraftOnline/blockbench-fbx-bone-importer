@@ -14,9 +14,7 @@
                 name: 'Import Bone Hierarchy from FBX',
                 description: 'Import bone hierarchy from an FBX file',
                 icon: 'bar_chart', // Replace 'icon' with an icon file or a Material Icons name
-                click: () => {
-                    this.importFbx();
-                },
+                click: () => this.importFbx()               
             });
             MenuBar.addAction(importAction, 'tools.0');
         },
@@ -35,7 +33,7 @@
                 const reader = new FileReader();
 
                 reader.onload = () => {
-                    const loader = new FBXLoader();
+                    const loader = new THREE.FBXLoader();
                     loader.parse(reader.result, '', (object) => {
                         // Process the bone hierarchy
                         const skeleton = object.children.find(child => child instanceof THREE.Skeleton);
