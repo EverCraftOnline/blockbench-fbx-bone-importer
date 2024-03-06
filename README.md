@@ -1,6 +1,6 @@
 # Blockbench FBX Bone Importer
 
-![Plugin Icon](https://via.placeholder.com/128) <!-- Replace the placeholder image URL with your plugin icon -->
+![Plugin Icon](https://github.com/EverCraftOnline/blockbench-fbx-bone-importer/blob/5f231d991aee4e7c4650d6f936fe37fd68ff3c8e/bone-hierarchy-plugin-window.jpg) <!-- Replace the placeholder image URL with your plugin icon -->
 
 A Blockbench plugin that allows users to import the bone hierarchy from FBX files without importing meshes, skins, or materials. This is helpful for users who want to create models based on an existing bone structure and export them to Unity or other game engines.
 
