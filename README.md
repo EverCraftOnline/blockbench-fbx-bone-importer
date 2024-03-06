@@ -4,6 +4,8 @@
 
 A Blockbench plugin that allows users to import the bone hierarchy from FBX files without importing meshes, skins, or materials. This is helpful for users who want to create models based on an existing bone structure and export them to Unity or other game engines.
 
+Import Bone Hierarchy (from C# produced JSON script) is current plugin effort!
+
 ## Features
 
 - Import bone hierarchy from FBX files
@@ -18,8 +20,8 @@ A Blockbench plugin that allows users to import the bone hierarchy from FBX file
 
 ## Usage
 
-1. In Blockbench, go to `Plugins > FBX Bone Importer` in the menu.
-2. Click on the `Import Bone Hierarchy from FBX` button.
+1. In Blockbench, go to `Plugins > UPDATE` in the menu.
+2. Click on the `Import Bone Hierarchy from UPDATE` button.
 3. Select the FBX file containing the bone hierarchy you want to import.
 4. The plugin will create Blockbench bones with the same names, positions, rotations, and scales as the original bones in the FBX file.
 
