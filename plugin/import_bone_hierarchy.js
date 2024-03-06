@@ -2,15 +2,18 @@
     var importAction;
 
     Plugin.register('import_bone_hierarchy', {
+        title: 'Bone Hierarchy Importer',
         name: 'Bone Hierarchy Importer',
         icon: 'import_export', // Replace 'icon' with an icon file or a Material Icons name
-        author: 'h1ddentree productions',
+        author: 'Hiddentree Entertainment Inc',
         description: 'Import bone hierarchy from JSON files',
+        about: 'This plugin allows for the seamless import of bone hierarchies from JSON files, facilitating easier transitions between Unity and Blockbench. Ideal for animators and developers seeking to streamline their workflow. For more information and contributions, visit [GitHub repository](https://github.com/EverCraftOnline/blockbench-fbx-bone-importer).',
         version: '1.0.0',
         min_version: '3.0.0',
         variant: 'both',
         onload() {
             importAction = new Action('import_bone_hierarchy', {
+            id: 'import_bone_hierarchy',
             name: 'Import Bone Hierarchy from JSON',
             description: 'Import bone hierarchy from a JSON file',
             icon: 'import_export', // Replace 'icon' with an icon file or a Material Icons name
